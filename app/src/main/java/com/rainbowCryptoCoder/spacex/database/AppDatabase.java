@@ -1,6 +1,7 @@
 package com.rainbowCryptoCoder.spacex.database;
 
 import android.content.Context;
+import android.provider.SyncStateContract;
 import android.util.Log;
 
 import androidx.room.Database;
@@ -13,22 +14,16 @@ import com.rainbowCryptoCoder.spacex.model.RecentItem;
 @Database(entities = {RecentItem.class }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static final Object LOCK = new Object();
-    private static final String DATABASE_NAME = "recents";
-    private static final String LOG_TAG ="AppDatabase" ;
     private static AppDatabase sInstance;
 
     public static AppDatabase getInstance(Context context) {
-        if (sInstance == null) {
-            synchronized (LOCK) {
-                sInstance = Room.databaseBuilder(context.getApplicationContext(),
-                        AppDatabase.class, AppDatabase.DATABASE_NAME)
+            if (null == sInstance) {
+                sInstance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "DB_NAME")
+                        .allowMainThreadQueries()
                         .build();
             }
+            return sInstance;
         }
-        Log.d(LOG_TAG, "Getting the database instance");
-        return sInstance;
-    }
 
     public abstract RecentItemDao recentItemDao();
 }

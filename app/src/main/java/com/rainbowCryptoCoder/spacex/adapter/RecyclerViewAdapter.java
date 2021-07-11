@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
+import com.rainbowCryptoCoder.spacex.MainActivity;
+import com.rainbowCryptoCoder.spacex.database.AppDatabase;
 import com.rainbowCryptoCoder.spacex.model.CrewModel;
 import com.rainbowCryptoCoder.spacex.R;
 import com.rainbowCryptoCoder.spacex.model.RecentItem;
@@ -28,7 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     List<RecentItem> recentItemsList;
     Context context;
 
-    public void setRecentItemsList(List<RecentItem> recentItemsList) {
+    public void setRecentItem(List<RecentItem> recentItem){
         this.recentItemsList = recentItemsList;
     }
 
@@ -48,35 +50,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.RecyclerHolder recyclerHolder, int i) {
-        recyclerHolder.view_name.setText(models.get(i).getName());
-        recyclerHolder.view_agency.setText(models.get(i).getAgency());
-        recyclerHolder.view_link.setText(models.get(i).getWikipedia());
 
-//        Picasso.with(context).load(models.get(i).getImage())
-//                .networkPolicy(NetworkPolicy.OFFLINE)
-//                .into(recyclerHolder.imageView, new Callback() {
-//                    @Override
-//                    public void onSuccess() {}
-//
-//                    @Override
-//                    public void onError() {
-//                        //try again online if the first time faild to lod from cash !!
-//                        Picasso.with(context).load(models.get(i).getImage())
-//                                .error(R.drawable.ic_error)
-//                                .into(recyclerHolder.imageView, new Callback() {
-//                                    @Override
-//                                    public void onSuccess() {}
-//                                    @Override
-//                                    public void onError() {}
-//                                });
-//                    }
-//                });
+        if (recentItemsList == null){
+            recyclerHolder.view_name.setText(models.get(i).getName());
+            recyclerHolder.view_agency.setText(models.get(i).getAgency());
+            recyclerHolder.view_link.setText(models.get(i).getWikipedia());
 
-        // create Picasso.Builder object
+            AppDatabase db = AppDatabase.getInstance(context);
+
+            RecentItem recentItem = new RecentItem();
+            recentItem.setName(models.get(i).getName());
+            recentItem.setAgency(models.get(i).getAgency());
+            recentItem.setImageUrl(models.get(i).getImage());
+            recentItem.setWikiLink(models.get(i).getWikipedia());
+            db.recentItemDao().insertRecent(recentItem);
+
+        }
+        else{
+//            AppDatabase db = AppDatabase.getInstance(context);
+//            db.recentItemDao().getAllRecent();
+//            List<RecentItem> recentItems = db.recentItemDao(context);
+
+            recyclerHolder.view_name.setText(recentItemsList.get(i).getName());
+            recyclerHolder.view_agency.setText(recentItemsList.get(i).getAgency());
+            recyclerHolder.view_link.setText(recentItemsList.get(i).getWikiLink());
+        }
+
+
         Picasso.Builder builder = new Picasso.Builder(context);
-
-        // let's change the standard behavior before we create the Picasso instance
-        // for example, let's switch out the standard downloader for the OkHttpClient
         builder.downloader(new OkHttp3Downloader(context));
         builder.build().load(models.get(i).getImage())
                 .placeholder(R.drawable.ic_loading)

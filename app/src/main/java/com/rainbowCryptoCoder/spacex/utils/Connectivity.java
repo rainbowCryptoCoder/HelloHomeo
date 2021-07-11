@@ -4,10 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-/**
- * Created by NoOne on 9/9/2018.
- */
-
 public class Connectivity {
 
     public static NetworkInfo getNetworkInfo(Context context){
