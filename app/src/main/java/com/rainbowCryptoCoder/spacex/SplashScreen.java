@@ -12,7 +12,7 @@ public class SplashScreen extends AppCompatActivity {
 
     LottieAnimationView lottieAnimationView;
     Intent intent;
-    private static int SPLASH_SCREEN = 4000;
+    private static int SPLASH_SCREEN = 1200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
 
         lottieAnimationView = findViewById(R.id.lottie);
 
-        lottieAnimationView.animate().setDuration(4000).setStartDelay(1000);
+        lottieAnimationView.animate().setDuration(4000).setStartDelay(100);
 
         new Handler().postDelayed(new Runnable() {
             @Override

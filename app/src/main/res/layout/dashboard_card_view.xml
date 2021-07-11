@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        app:cardCornerRadius="6dp"
+        android:backgroundTint="@color/grey">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="410dp"
+                android:layout_marginStart="30dp"/>
+
+            <ImageView
+                android:id="@+id/img_person"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_person"
+                android:tint="@color/white"
+                tools:ignore="UseAppTint"
+                android:layout_toStartOf="@+id/tv_name"
+                android:layout_marginEnd="-20dp"
+                android:layout_marginTop="405dp"/>
+
+            <TextView
+                android:id="@+id/tv_agency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:text="Agency"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"/>
+
+            <ImageView
+                android:id="@+id/img_agency"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_agency"
+                app:tint="@color/white"
+                android:layout_marginTop="440dp"
+                android:layout_toStartOf="@+id/tv_agency"
+                android:layout_marginEnd="-20dp"/>
+
+            <TextView
+                android:id="@+id/tv_wikipedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_agency"
+                android:text="Link"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="30dp"/>
+
+            <ImageView
+                android:id="@+id/img_wiki"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_wiki"
+                app:tint="@color/white"
+                android:layout_marginTop="472dp"
+                android:layout_toStartOf="@+id/tv_wikipedia"
+                android:layout_marginEnd="-20dp"/>
+
+            <ImageView
+                android:id="@+id/img_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_loading"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
