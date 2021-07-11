@@ -1,6 +1,8 @@
 package com.rainbowCryptoCoder.spacex.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.rainbowCryptoCoder.spacex.model.CrewModel;
 import com.rainbowCryptoCoder.spacex.R;
+import com.rainbowCryptoCoder.spacex.model.RecentItem;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,9 +25,14 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerHolder> {
 
     List<CrewModel> models;
+    List<RecentItem> recentItemsList;
     Context context;
 
-    public RecyclerViewAdapter(List<CrewModel> models) {
+    public void setRecentItemsList(List<RecentItem> recentItemsList) {
+        this.recentItemsList = recentItemsList;
+    }
+
+    public RecyclerViewAdapter(Context context, List<CrewModel> models) {
         this.models = models;
         this.context = context;
     }
@@ -42,16 +52,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         recyclerHolder.view_agency.setText(models.get(i).getAgency());
         recyclerHolder.view_link.setText(models.get(i).getWikipedia());
 
-//        // create Picasso.Builder object
-//        Picasso.Builder builder = new Picasso.Builder(context);
+//        Picasso.with(context).load(models.get(i).getImage())
+//                .networkPolicy(NetworkPolicy.OFFLINE)
+//                .into(recyclerHolder.imageView, new Callback() {
+//                    @Override
+//                    public void onSuccess() {}
 //
-//        // let's change the standard behavior before we create the Picasso instance
-//        // for example, let's switch out the standard downloader for the OkHttpClient
-//        builder.downloader(new OkHttp3Downloader(context));
-//        builder.build().load(models.get(i).getImage())
-//                .placeholder(R.drawable.ic_loading)
-//                .error(R.drawable.ic_error)
-//                .into(recyclerHolder.imageView);
+//                    @Override
+//                    public void onError() {
+//                        //try again online if the first time faild to lod from cash !!
+//                        Picasso.with(context).load(models.get(i).getImage())
+//                                .error(R.drawable.ic_error)
+//                                .into(recyclerHolder.imageView, new Callback() {
+//                                    @Override
+//                                    public void onSuccess() {}
+//                                    @Override
+//                                    public void onError() {}
+//                                });
+//                    }
+//                });
+
+        // create Picasso.Builder object
+        Picasso.Builder builder = new Picasso.Builder(context);
+
+        // let's change the standard behavior before we create the Picasso instance
+        // for example, let's switch out the standard downloader for the OkHttpClient
+        builder.downloader(new OkHttp3Downloader(context));
+        builder.build().load(models.get(i).getImage())
+                .placeholder(R.drawable.ic_loading)
+                .error(R.drawable.ic_error)
+                .into(recyclerHolder.imageView);
     }
 
     @Override
@@ -63,14 +93,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView view_name;
         TextView view_agency;
         TextView view_link;
-//        ImageView imageView;
+        ImageView imageView;
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
             view_name = itemView.findViewById(R.id.tv_name);
             view_agency = itemView.findViewById(R.id.tv_agency);
             view_link = itemView.findViewById(R.id.tv_wikipedia);
-//            imageView = itemView.findViewById(R.id.img_view);
+            imageView = itemView.findViewById(R.id.img_view);
         }
     }
 

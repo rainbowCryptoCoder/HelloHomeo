@@ -1,19 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/black"
-    android:fillViewport="true">
+    android:background="@color/black">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="2dp"
-        android:backgroundTint="@color/white"/>
+        android:fillViewport="true">
 
-</ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            android:backgroundTint="@color/white"/>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp">
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:elevation="8dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/round_shape">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/reloadLottie"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:lottie_rawRes="@raw/reload_lottie"
+                app:lottie_colorFilter="@color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:elevation="8dp"
+            android:layout_margin="15dp"
+            android:background="@drawable/round_shape">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/deleteLottie"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:lottie_rawRes="@raw/delete_lottie"
+                app:lottie_colorFilter="@color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
